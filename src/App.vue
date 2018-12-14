@@ -5,19 +5,20 @@
     </v-toolbar>
     <v-spacer></v-spacer>
     <v-content>
-      <!--HelloWorld/-->      
+      <Home />      
     </v-content>
   </v-app>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+//import HelloWorld from './components/HelloWorld'
 import Menu from './components/Menu'
+import Home from './views/Home'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    Home,
     Menu
   },
   data () {
