@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    itemCount: 0
+    itemCount: 1
   },
   mutations: {
 
