@@ -1,9 +1,15 @@
 <template>
-    <div>
-        <template v-for="product in $store.getters.ProductList">            
-            <Product  />    
-        </template>
-    </div>
+  <v-container grid-list-xl>
+    <v-layout  justify-center>
+        <v-flex xs2 flexbox fluid v-for="product in $store.getters.ProductList">
+            <Product :product="product"/>       
+        </v-flex>
+    </v-layout>
+
+    <v-layout>
+        
+    </v-layout>
+  </v-container>
 </template>
 
 <script lang="ts">

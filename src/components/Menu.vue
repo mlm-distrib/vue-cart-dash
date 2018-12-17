@@ -1,7 +1,7 @@
 <template>
   <div class="text-xs-center">
     <v-menu offset-y>
-        <v-btn slot="activator" color="primary" dark > <v-icon small> home </v-icon> &nbsp;Home </v-btn>
+        <v-btn slot="activator" color="primary" dark> <v-icon small> home </v-icon> &nbsp;Home </v-btn>
         <v-btn slot="activator" color="primary" dark> <v-icon small> assignment </v-icon> &nbsp;My Orders </v-btn>           
         <v-btn slot="activator" color="primary" dark> 
             <v-icon small> shopping_cart </v-icon> &nbsp;Cart                 
