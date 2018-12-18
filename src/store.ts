@@ -1,25 +1,56 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
+const API_ROOT = 'http://localhost:8090'
+const ALL_PRODUCTS = 'ALL_PRODUCTS'
+const ADD_PRODUCT = 'ADD_PRODUCT'
+const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
+
 
 export default new Vuex.Store({
   state: {
-    itemCount: 0,    
-    productList : [
-      {Id: 1, Name: 'Vivo V-Max', Currency: '$', Price: 140, Details: 'The Vivo V3Max is powered by 1.4GHz octa-core processor and it comes with 4GB of RAM.... The Vivo V3Max is a Dual-SIM (GSM and GSM) smartphone LTPS IPS LCD display', ImageURL: 'https://static.toiimg.com/photo/64428999/Vivo-NEX.jpg'},
-      {Id: 2, Name: 'Honor 10', Currency: '$', Price: 130, Details: 'Huawei Honor View 10 Android smartphone. Announced Dec 2017. Features 5.99″ LTPS IPS LCD display, HiSilicon Kirin 970 chipset, Dual: 16 MP (f/1.8) + 20', ImageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc1lzy6DifkGwhmDjxZ8LioEWi2yq9CW_q4gKE3DoG2dcn7RbO'},
-      {Id: 2, Name: 'Honor 10', Currency: '$', Price: 130, Details: 'Huawei Honor View 10 Android smartphone. Announced Dec 2017. Features 5.99″ LTPS IPS LCD display, HiSilicon Kirin 970 chipset, Dual: 16 MP (f/1.8) + 20', ImageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc1lzy6DifkGwhmDjxZ8LioEWi2yq9CW_q4gKE3DoG2dcn7RbO'},
-      {Id: 2, Name: 'Honor 10', Currency: '$', Price: 130, Details: 'Huawei Honor View 10 Android smartphone. Announced Dec 2017. Features 5.99″ LTPS IPS LCD display, HiSilicon Kirin 970 chipset, Dual: 16 MP (f/1.8) + 20', ImageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc1lzy6DifkGwhmDjxZ8LioEWi2yq9CW_q4gKE3DoG2dcn7RbO'},
-      {Id: 2, Name: 'Honor 10', Currency: '$', Price: 130, Details: 'Huawei Honor View 10 Android smartphone. Announced Dec 2017. Features 5.99″ LTPS IPS LCD display, HiSilicon Kirin 970 chipset, Dual: 16 MP (f/1.8) + 20', ImageURL: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc1lzy6DifkGwhmDjxZ8LioEWi2yq9CW_q4gKE3DoG2dcn7RbO'},
-      {Id: 3, Name: 'Samsung S9', Currency: '$', Price: 700, Details: 'The Samsung Galaxy S9 offers a 5.8 inch Quad HD+ AMOLED Display that ... The Galaxy S9 captures 4x as many frames per second LTPS IPS LCD display', ImageURL: 'https://assets.mspcdn.net/t_c-desktop-normal,f_auto,q_auto,d_c:noimage.jpg/c/11918-55-1.jpg'}
-    ]
+    showLoader: false,
+    itemCount: 0,
+    productList : [],
+    myChart: []
   },
   mutations: {
-
+    [ALL_PRODUCTS](state, payload){
+      state.showLoader = true;
+      state.productList = payload;
+    },
+    [ADD_PRODUCT]: (state, payload) => {
+      //console.log(payload)
+      payload.IsRemove = true
+      state.myChart.push(payload)
+      state.itemCount = state.myChart.length
+    },
+    [REMOVE_PRODUCT]: (state, payload) => {
+      //console.log(payload)
+      const index = state.myChart.findIndex(p => p.Id === payload.Id)
+      console.log(index)
+      state.myChart.splice(index,1)
+      state.itemCount = state.myChart.length
+    }
   },
   actions: {
-
+    allProducts({commit}){
+      //commit(ALL_PRODUCTS)      
+      axios.get(API_ROOT+'/products').then(res => {
+          console.log(res.data);
+          commit(ALL_PRODUCTS,  res.data)
+      }).catch(err=>{
+        console.log(err);
+      })
+    },
+    addProduct({commit}){
+      commit(ADD_PRODUCT)      
+    },
+    removeProduct({commit}){
+      commit(REMOVE_PRODUCT)
+    }
   },
   getters: {
     ItemCount: state => {
@@ -27,6 +58,9 @@ export default new Vuex.Store({
     },
     ProductList: state => {
       return state.productList
+    },
+    MyCartDetails: state => {
+      return state.myChart
     }
   }
 })

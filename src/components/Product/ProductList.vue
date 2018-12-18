@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-xl>
     <v-layout  justify-center>
-        <v-flex xs2 flexbox fluid v-for="product in $store.getters.ProductList">
+        <v-flex xs2 flexbox fluid v-for="product in products">
             <Product :product="product"/>       
         </v-flex>
     </v-layout>
@@ -16,10 +16,21 @@
 import { Component, Vue } from 'vue-property-decorator';
 import Product from '@/components/Product/Product.vue'
 
-@Component({
+
+export default {
+    name: 'ProductList',
+    created(){
+        if(this.products.length === 0){
+            this.$store.dispatch('allProducts')
+        }
+    },
+    computed: {
+        products(){
+            return this.$store.getters.ProductList
+        }
+    },
     components:{
         Product
     }
-})
-export default class ProductList extends Vue{}
+}
 </script>

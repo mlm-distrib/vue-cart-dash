@@ -1,258 +1,183 @@
 <template>
-    <main class="page">
-	 	<section class="shopping-cart dark">
-	 		<div class="container">
-		        <div class="block-heading">
-		          <h2>Shopping Cart</h2>
-		          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in, mattis vitae leo.</p>
-		        </div>
-		        <div class="content">
-	 				<div class="row">
-	 					<div class="col-md-12 col-lg-8">
-	 						<div class="items">
-				 				<div class="product">
-				 					<div class="row">
-					 					<div class="col-md-3">
-					 						<img class="img-fluid mx-auto d-block image" src="image.jpg">
-					 					</div>
-					 					<div class="col-md-8">
-					 						<div class="info">
-						 						<div class="row">
-							 						<div class="col-md-5 product-name">
-							 							<div class="product-name">
-								 							<a href="#">Lorem Ipsum dolor</a>
-								 							<div class="product-info">
-									 							<div>Display: <span class="value">5 inch</span></div>
-									 							<div>RAM: <span class="value">4GB</span></div>
-									 							<div>Memory: <span class="value">32GB</span></div>
-									 						</div>
-									 					</div>
-							 						</div>
-							 						<div class="col-md-4 quantity">
-							 							<label for="quantity">Quantity:</label>
-							 							<input id="quantity" type="number" value ="1" class="form-control quantity-input">
-							 						</div>
-							 						<div class="col-md-3 price">
-							 							<span>$120</span>
-							 						</div>
-							 					</div>
-							 				</div>
-					 					</div>
-					 				</div>
-				 				</div>
-				 				<div class="product">
-				 					<div class="row">
-					 					<div class="col-md-3">
-					 						<img class="img-fluid mx-auto d-block image" src="image.jpg">
-					 					</div>
-					 					<div class="col-md-8">
-					 						<div class="info">
-						 						<div class="row">
-							 						<div class="col-md-5 product-name">
-							 							<div class="product-name">
-								 							<a href="#">Lorem Ipsum dolor</a>
-								 							<div class="product-info">
-									 							<div>Display: <span class="value">5 inch</span></div>
-									 							<div>RAM: <span class="value">4GB</span></div>
-									 							<div>Memory: <span class="value">32GB</span></div>
-									 						</div>
-									 					</div>
-							 						</div>
-							 						<div class="col-md-4 quantity">
-							 							<label for="quantity">Quantity:</label>
-							 							<input id="quantity" type="number" value ="1" class="form-control quantity-input">
-							 						</div>
-							 						<div class="col-md-3 price">
-							 							<span>$120</span>
-							 						</div>
-							 					</div>
-							 				</div>
-					 					</div>
-					 				</div>
-				 				</div>
-				 				<div class="product">
-				 					<div class="row">
-					 					<div class="col-md-3">
-					 						<img class="img-fluid mx-auto d-block image" src="image.jpg">
-					 					</div>
-					 					<div class="col-md-8">
-					 						<div class="info">
-						 						<div class="row">
-							 						<div class="col-md-5 product-name">
-							 							<div class="product-name">
-								 							<a href="#">Lorem Ipsum dolor</a>
-								 							<div class="product-info">
-									 							<div>Display: <span class="value">5 inch</span></div>
-									 							<div>RAM: <span class="value">4GB</span></div>
-									 							<div>Memory: <span class="value">32GB</span></div>
-									 						</div>
-									 					</div>
-							 						</div>
-							 						<div class="col-md-4 quantity">
-							 							<label for="quantity">Quantity:</label>
-							 							<input id="quantity" type="number" value ="1" class="form-control quantity-input">
-							 						</div>
-							 						<div class="col-md-3 price">
-							 							<span>$120</span>
-							 						</div>
-							 					</div>
-							 				</div>
-					 					</div>
-					 				</div>
-				 				</div>
-				 			</div>
-			 			</div>
-			 			<div class="col-md-12 col-lg-4">
-			 				<div class="summary">
-			 					<h3>Summary</h3>
-			 					<div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
-			 					<div class="summary-item"><span class="text">Discount</span><span class="price">$0</span></div>
-			 					<div class="summary-item"><span class="text">Shipping</span><span class="price">$0</span></div>
-			 					<div class="summary-item"><span class="text">Total</span><span class="price">$360</span></div>
-			 					<button type="button" class="btn btn-primary btn-lg btn-block">Checkout</button>
-				 			</div>
-			 			</div>
-		 			</div> 
-		 		</div>
-	 		</div>
-		</section>
-	</main>
+    <main class="page payment-page">
+        <section class="payment-form dark">
+        <div class="container">
+            <div class="block-heading">
+            	<h2>My Cart({{ $store.getters.ItemCount }})</h2>
+            </div>
+            <form>
+				<div class="products">
+					<h3 class="title">Details</h3>
+					<div class="item" v-for="item in cartDetails">
+						<span class="price">{{ item.Currency }}{{ item.Price }}</span>
+						<p class="item-name">{{ item.Name }}</p>
+						<p class="item-description">{{ item.Details }}</p>
+					</div>
+					<div class="total">Total<span class="price">$320</span></div>
+					<br />
+					<div class="order-buttons">
+						<v-btn slot="activator" color="primary" to="/" dark small> &nbsp;&nbsp;<  Continue Shopping</v-btn>
+						<v-btn slot="activator" color="primary" to="/payment" dark small> <v-icon small> check_circle </v-icon>&nbsp;&nbsp;Place Order</v-btn>
+					</div>
+				</div>
+            </form>
+        </div>
+        </section>
+    </main>
 </template>
 <script>
-	export default class Cart extends Vue{}
+	export default {
+		name: 'Cart',
+		computed: {
+			cartDetails(){
+				return this.$store.getters.MyCartDetails
+			}
+		}		
+	}
 </script>
 <style>
-    .shopping-cart{
+	.order-buttons{
+		text-align: Right;
+	}
+    .payment-form{
         padding-bottom: 50px;
         font-family: 'Montserrat', sans-serif;
     }
 
-    .shopping-cart.dark{
+    .payment-form.dark{
         background-color: #f6f6f6;
     }
 
-    .shopping-cart .content{
+    .payment-form .content{
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
         background-color: white;
     }
 
-    .shopping-cart .block-heading{
+    .payment-form .block-heading{
         padding-top: 50px;
         margin-bottom: 40px;
         text-align: center;
     }
 
-    .shopping-cart .block-heading p{
-        text-align: center;
+    .payment-form .block-heading p{
+        text-align: Right;
         max-width: 420px;
         margin: auto;
         opacity:0.7;
     }
 
-    .shopping-cart .dark .block-heading p{
+    .payment-form.dark .block-heading p{
         opacity:0.8;
     }
 
-    .shopping-cart .block-heading h1,
-    .shopping-cart .block-heading h2,
-    .shopping-cart .block-heading h3 {
+    .payment-form .block-heading h1,
+    .payment-form .block-heading h2,
+    .payment-form .block-heading h3 {
         margin-bottom:1.2rem;
         color: #3b99e0;
     }
 
-    .shopping-cart .items{
-        margin: auto;
-    }
-
-    .shopping-cart .items .product{
-        margin-bottom: 20px;
-        padding-top: 20px;
-        padding-bottom: 20px;
-    }
-
-    .shopping-cart .items .product .info{
-        padding-top: 0px;
-        text-align: center;
-    }
-
-    .shopping-cart .items .product .info .product-name{
-        font-weight: 600;
-    }
-
-    .shopping-cart .items .product .info .product-name .product-info{
-        font-size: 14px;
-        margin-top: 15px;
-    }
-
-    .shopping-cart .items .product .info .product-name .product-info .value{
-        font-weight: 400;
-    }
-
-    .shopping-cart .items .product .info .quantity .quantity-input{
-        margin: auto;
-        width: 80px;
-    }
-
-    .shopping-cart .items .product .info .price{
-        margin-top: 15px;
-        font-weight: bold;
-        font-size: 22px;
-    }
-
-    .shopping-cart .summary{
+    .payment-form form{
         border-top: 2px solid #5ea4f3;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.075);
+        background-color: #ffffff;
+        padding: 0;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .payment-form .title{
+        font-size: 1em;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        margin-bottom: 0.8em;
+        font-weight: 600;
+        padding-bottom: 8px;
+    }
+
+    .payment-form .products{
         background-color: #f7fbff;
-        height: 100%;
-        padding: 30px;
+        padding: 25px;
     }
 
-    .shopping-cart .summary h3{
-        text-align: center;
-        font-size: 1.3em;
-        font-weight: 600;
-        padding-top: 20px;
-        padding-bottom: 20px;
+    .payment-form .products .item{
+        margin-bottom:1em;
     }
 
-    .shopping-cart .summary .summary-item:not(:last-of-type){
-        padding-bottom: 10px;
-        padding-top: 10px;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    .payment-form .products .item-name{
+        font-weight:600;
+        font-size: 0.9em;
     }
 
-    .shopping-cart .summary .text{
-        font-size: 1em;
-        font-weight: 600;
+    .payment-form .products .item-description{
+        font-size:0.8em;
+        opacity:0.6;
     }
 
-    .shopping-cart .summary .price{
-        font-size: 1em;
+    .payment-form .products .item p{
+        margin-bottom:0.2em;
+    }
+
+    .payment-form .products .price{
         float: right;
+        font-weight: 600;
+        font-size: 0.9em;
     }
 
-    .shopping-cart .summary button{
-        margin-top: 20px;
+    .payment-form .products .total{
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+        margin-top: 10px;
+        padding-top: 19px;
+        font-weight: 600;
+        line-height: 1;
     }
 
-    @media (min-width: 768px) {
-        .shopping-cart .items .product .info {
-            padding-top: 25px;
-            text-align: left; 
-        }
-
-        .shopping-cart .items .product .info .price {
-            font-weight: bold;
-            font-size: 22px;
-            top: 17px; 
-        }
-
-        .shopping-cart .items .product .info .quantity {
-            text-align: center; 
-        }
-        .shopping-cart .items .product .info .quantity .quantity-input {
-            padding: 4px 10px;
-            text-align: center; 
-        }
+    .payment-form .card-details{
+        padding: 25px 25px 15px;
     }
 
-</style>
+    .payment-form .card-details label{
+        font-size: 12px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: #79818a;
+        text-transform: uppercase;
+    }
+
+    .payment-form .card-details button{
+        margin-top: 0.6em;
+        padding:12px 0;
+        font-weight: 600;
+    }
+
+    .payment-form .date-separator{
+        margin-left: 10px;
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+
+    @media (min-width: 576px) {
+        .payment-form .title {
+            font-size: 1.2em; 
+        }
+
+        .payment-form .products {
+            padding: 40px; 
+        }
+
+        .payment-form .products .item-name {
+            font-size: 1em; 
+        }
+
+        .payment-form .products .price {
+            font-size: 1em; 
+        }
+
+        .payment-form .card-details {
+            padding: 40px 40px 30px; 
+        }
+
+        .payment-form .card-details button {
+            margin-top: 2em; 
+        } 
+    }
+</style>  
