@@ -8,12 +8,14 @@
             <form>
 				<div class="products">
 					<h3 class="title">Details</h3>
-					<div class="item" v-for="item in cartDetails">
-						<span class="price">{{ item.Currency }}{{ item.Price }}</span>
+					<div class="item" v-for="item in cartDetails">						
+						<span class="price">{{ item.Currency }}{{ item.Price * item.Qty }}</span>
 						<p class="item-name">{{ item.Name }}</p>
+							<span class="units">Qty: {{ item.Qty }}</span> &nbsp;&nbsp;
+							<span class="units">Unit price: {{ item.Currency }}{{ item.Price }}</span>
 						<p class="item-description">{{ item.Details }}</p>
 					</div>
-					<div class="total">Total<span class="price">$320</span></div>
+					<div class="total">Total<span class="price">{{ 999 }}</span></div>
 					<br />
 					<div class="order-buttons">
 						<v-btn slot="activator" color="primary" to="/" dark small> &nbsp;&nbsp;<  Continue Shopping</v-btn>
@@ -31,6 +33,9 @@
 		computed: {
 			cartDetails(){
 				return this.$store.getters.MyCartDetails
+			},
+			cartTotal(){
+				
 			}
 		}		
 	}
@@ -121,6 +126,14 @@
         float: right;
         font-weight: 600;
         font-size: 0.9em;
+    }
+
+	.units{
+        float: left;
+        font-weight: 600;
+        font-size: 0.8em;
+		padding-right: 5px;
+		color: grey
     }
 
     .payment-form .products .total{

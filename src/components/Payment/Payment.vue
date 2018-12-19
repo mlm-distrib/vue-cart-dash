@@ -33,8 +33,9 @@
                         <input id="cvc" type="text" class="form-control" placeholder="CVC" aria-label="Card Holder" aria-describedby="basic-addon1">
                     </div>
                     </div>
-                    
+                    <br />
                     <div class="order-buttons">
+                        <v-btn slot="activator" color="primary" to="/cart" dark small> &nbsp;&nbsp;<  Back</v-btn>
                         <v-btn slot="activator" color="primary" to="/payment" dark small> <v-icon small> check_circle </v-icon>&nbsp;&nbsp;Confirm</v-btn>
                     </div>
                 </div>

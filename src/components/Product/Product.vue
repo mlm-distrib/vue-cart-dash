@@ -28,7 +28,7 @@
         props: ['product'],
         components: {},
         methods:{
-            addToCart:(store, product) => {
+            addToCart:(store, product) => {                
                 store.commit(ADD_PRODUCT, product);
             },
             removeFromCart:(store, product) => {
