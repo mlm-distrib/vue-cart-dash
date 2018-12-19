@@ -14,7 +14,8 @@ export default new Vuex.Store({
     showLoader: false,
     itemCount: 0,
     productList : [],
-    myChart: []
+    myChart: [],
+    myChartCurr: []
   },
   mutations: {
     [ALL_PRODUCTS](state, payload){
@@ -26,6 +27,7 @@ export default new Vuex.Store({
       payload.IsRemove = true
       state.myChart.push(payload)
       state.itemCount = state.myChart.length
+      state.myChartCurr = payload.Currency
     },
     [REMOVE_PRODUCT]: (state, payload) => {
       //console.log(payload)
@@ -61,6 +63,8 @@ export default new Vuex.Store({
     },
     MyCartDetails: state => {
       return state.myChart
-    }
+    },
+    MyCartTotal: state => state.myChart.reduce((acc, itm) => acc + itm.Total, 0),
+    MyCartCurrency: state => state.myChartCurr
   }
 })

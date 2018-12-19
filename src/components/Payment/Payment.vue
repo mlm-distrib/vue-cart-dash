@@ -7,7 +7,7 @@
             </div>
             <form>
 				<div class="products">
-					<div class="">Total<span class="price">$320</span></div>
+					<div class="">Total checkout value:<span class="price">{{ cartTotal }}</span></div>
                     </div>
                     <div class="card-details">
                     <h3 class="title">Credit Card Details</h3>
@@ -36,7 +36,7 @@
                     <br />
                     <div class="order-buttons">
                         <v-btn slot="activator" color="primary" to="/cart" dark small> &nbsp;&nbsp;<  Back</v-btn>
-                        <v-btn slot="activator" color="primary" to="/payment" dark small> <v-icon small> check_circle </v-icon>&nbsp;&nbsp;Confirm</v-btn>
+                        <v-btn slot="activator" color="primary" to="/payment" dark small> <v-icon small> done_outline </v-icon>&nbsp;&nbsp;Pay</v-btn>
                     </div>
                 </div>
             </form>
@@ -50,6 +50,9 @@
 		computed: {
 			cartDetails(){
 				return this.$store.getters.MyCartDetails
+			},
+			cartTotal(){
+				return this.$store.getters.MyCartCurrency + this.$store.getters.MyCartTotal
 			}
 		}
     }

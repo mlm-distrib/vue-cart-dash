@@ -7,17 +7,21 @@
             </div>
             <form>
 				<div class="products">
-					<h3 class="title">Details</h3>
+					<h3 class="title">Details</h3>					
+					<div class="item" v-show="cartDetails.length <= 0">
+						<span>Your cart is empty. Please add some item(s) to proceed further.</span>
+					</div>
 					<div class="item" v-for="item in cartDetails">						
 						<span class="price">{{ item.Currency }}{{ item.Price * item.Qty }}</span>
 						<p class="item-name">{{ item.Name }}</p>
 							<span class="units">Qty: {{ item.Qty }}</span> &nbsp;&nbsp;
-							<span class="units">Unit price: {{ item.Currency }}{{ item.Price }}</span>
+							<span class="units">| Unit price: {{ item.Currency }}{{ item.Price }}</span>
+							<v-icon color="red" v-on:click="removeFromCart($store, item)" small>delete</v-icon>
 						<p class="item-description">{{ item.Details }}</p>
 					</div>
-					<div class="total">Total<span class="price">{{ 999 }}</span></div>
+					<div class="total">Total:<span class="price">{{ cartTotal }}</span></div>
 					<br />
-					<div class="order-buttons">
+					<div class="order-buttons" v-show="cartDetails.length > 0">
 						<v-btn slot="activator" color="primary" to="/" dark small> &nbsp;&nbsp;<  Continue Shopping</v-btn>
 						<v-btn slot="activator" color="primary" to="/payment" dark small> <v-icon small> check_circle </v-icon>&nbsp;&nbsp;Place Order</v-btn>
 					</div>
@@ -27,7 +31,8 @@
         </section>
     </main>
 </template>
-<script>
+<script lang="ts">
+    const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 	export default {
 		name: 'Cart',
 		computed: {
@@ -35,9 +40,16 @@
 				return this.$store.getters.MyCartDetails
 			},
 			cartTotal(){
-				
+				return this.$store.getters.MyCartCurrency + this.$store.getters.MyCartTotal
 			}
-		}		
+		},
+		methods:{
+            removeFromCart:(store, item) => {
+				console.log(item)
+                item.IsRemove = false
+                store.commit(REMOVE_PRODUCT, item);
+            }
+		}
 	}
 </script>
 <style>

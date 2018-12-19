@@ -28,7 +28,8 @@
         props: ['product'],
         components: {},
         methods:{
-            addToCart:(store, product) => {                
+            addToCart:(store, product) => {        
+                product.Total = product.Qty * product.Price
                 store.commit(ADD_PRODUCT, product);
             },
             removeFromCart:(store, product) => {
